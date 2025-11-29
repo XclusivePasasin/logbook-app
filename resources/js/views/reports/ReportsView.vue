@@ -13,12 +13,27 @@
               style="width: 100%"
             />
           </n-form-item>
+          <n-form-item label="Coordinador">
+            <n-input
+              v-model:value="coordinatorName"
+              placeholder="Nombre del coordinador"
+              style="width: 200px"
+            />
+          </n-form-item>
+          <n-form-item label="Turno">
+            <n-select
+              v-model:value="shift"
+              :options="shiftOptions"
+              placeholder="Seleccionar turno"
+              style="width: 150px"
+            />
+          </n-form-item>
           <n-form-item>
             <n-space>
               <n-button type="primary" @click="fetchReports" :loading="loading">
                 Actualizar
               </n-button>
-              <n-button type="success" @click="downloadPDF" :loading="downloadingPDF">
+              <n-button type="warning" @click="downloadPDF" :loading="downloadingPDF" :disabled="!canGeneratePDF">
                 Generar PDF
               </n-button>
             </n-space>
@@ -99,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useMessage } from 'naive-ui';
 import api from '../../api/axios';
 import { format } from 'date-fns';
@@ -107,17 +122,29 @@ import { useBreakpoints, breakpointsTailwind } from '@vueuse/core';
 
 const message = useMessage();
 const breakpoints = useBreakpoints(breakpointsTailwind);
-const isMobile = breakpoints.smaller('md');
+const isMobile = breakpoints.smaller('lg');
 
 const loading = ref(false);
 const downloadingPDF = ref(false);
 const selectedDate = ref(format(new Date(), 'yyyy-MM-dd'));
+const coordinatorName = ref('');
+const shift = ref('Mañana');
+const shiftOptions = [
+  { label: 'Mañana', value: 'Mañana' },
+  { label: 'Tarde', value: 'Tarde' },
+  { label: 'Noche', value: 'Noche' }
+];
 const stats = ref({
   total_trips: 0,
   total_amount: 0,
   total_passengers: 0,
   by_payment_method: [],
   by_driver: [],
+});
+
+// Computed property to check if all required fields are filled
+const canGeneratePDF = computed(() => {
+  return !!(selectedDate.value && coordinatorName.value.trim() && shift.value);
 });
 
 function getPaymentLabel(method) {
@@ -188,7 +215,9 @@ async function downloadPDF() {
   downloadingPDF.value = true;
   try {
     const params = {
-      date: selectedDate.value || format(new Date(), 'yyyy-MM-dd')
+      date: selectedDate.value || format(new Date(), 'yyyy-MM-dd'),
+      coordinator: coordinatorName.value,
+      shift: shift.value
     };
     
     const response = await api.get('/trips-report/download', {

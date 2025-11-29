@@ -1,0 +1,8 @@
+node_modules
+.git
+.gitattributes
+docker-compose.yml
+.editorconfig
+tests
+phpunit.xml
+.phpunit.result.cache

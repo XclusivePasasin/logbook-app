@@ -15,6 +15,10 @@
             font-family: Arial, sans-serif;
             background-color: #fff;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
@@ -182,14 +186,13 @@
     </style>
 </head>
 <body>
-    @foreach($trips->chunk(20) as $pageIndex => $pageTrips)
-    <div class="container" style="{{ !$loop->last ? 'page-break-after: always;' : '' }}">
+    <div class="container">
         <!-- Header -->
         <div class="header">
             <table class="header-table">
                 <tr>
                     <td class="logo-cell">
-                        <img src="{{ public_path('shalom-logo.png') }}" alt="Shalom Logo" style="max-width: 130px; max-height: 80px;">
+                        <img src="<?php echo e(public_path('shalom-logo.png')); ?>" alt="Shalom Logo" style="max-width: 130px; max-height: 80px;">
                     </td>
                     <td class="info-cell">
                         <div class="company-title">TRANSPORTES EJECUTIVOS SHALOM S.A. DE C.V.</div>
@@ -199,15 +202,15 @@
                             <tr>
                                 <td>
                                     <span class="info-label">TURNO:</span>
-                                    <span class="info-line">{{ $shift ?: '&nbsp;' }}</span>
+                                    <span class="info-line"><?php echo e($shift ?: '&nbsp;'); ?></span>
                                 </td>
                                 <td>
                                     <span class="info-label">COORDINADOR:</span>
-                                    <span class="info-line">{{ $coordinator ?: '&nbsp;' }}</span>
+                                    <span class="info-line"><?php echo e($coordinator ?: '&nbsp;'); ?></span>
                                 </td>
                                 <td>
                                     <span class="info-label">FECHA:</span>
-                                    <span class="info-line">{{ $date }}</span>
+                                    <span class="info-line"><?php echo e($date); ?></span>
                                 </td>
                             </tr>
                         </table>
@@ -237,28 +240,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($pageTrips as $index => $trip)
+                    <?php $__currentLoopData = $trips; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $trip): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td class="row-number">{{ ($pageIndex * 20) + $index + 1 }}</td>
-                        <td>{{ \Carbon\Carbon::parse($trip->trip_time)->format('H:i') }}</td>
-                        <td>{{ $trip->passengers }}</td>
-                        <td class="text-center">{{ $trip->origin }}</td>
-                        <td class="text-center">{{ $trip->destination }}</td>
-                        <td>{{ $trip->payment_method == 'E' ? 'X' : '' }}</td>
-                        <td>{{ $trip->payment_method == 'CH' ? 'X' : '' }}</td>
-                         <td>{{ $trip->payment_method == 'TJ' ? 'X' : '' }}</td>
-                        <td>${{ number_format($trip->amount, 2) }}</td>
-                        <td class="text-center">{{ $trip->driver->name ?? '' }}</td>
-                        <td class="text-center">{{ $trip->equipment_number ?? '' }}</td>
-                        <td>{{ $trip->is_ida ? 'X' : '' }}</td>
-                        <td>{{ $trip->is_vuelta ? 'X' : '' }}</td>
+                        <td class="row-number"><?php echo e($index + 1); ?></td>
+                        <td><?php echo e(\Carbon\Carbon::parse($trip->trip_time)->format('H:i')); ?></td>
+                        <td><?php echo e($trip->passengers); ?></td>
+                        <td class="text-center"><?php echo e($trip->origin); ?></td>
+                        <td class="text-center"><?php echo e($trip->destination); ?></td>
+                        <td><?php echo e($trip->payment_method == 'E' ? 'X' : ''); ?></td>
+                        <td><?php echo e($trip->payment_method == 'CH' ? 'X' : ''); ?></td>
+                         <td><?php echo e($trip->payment_method == 'TJ' ? 'X' : ''); ?></td>
+                        <td>$<?php echo e(number_format($trip->amount, 2)); ?></td>
+                        <td class="text-center"><?php echo e($trip->driver->name ?? ''); ?></td>
+                        <td class="text-center"><?php echo e($trip->equipment_number ?? ''); ?></td>
+                        <td><?php echo e($trip->is_ida ? 'X' : ''); ?></td>
+                        <td><?php echo e($trip->is_vuelta ? 'X' : ''); ?></td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     
-                    <!-- Fill remaining rows to ensure table looks complete (only on the last page if needed, or always to keep size consistent) -->
-                    @for($i = $pageTrips->count() + 1; $i <= 20; $i++)
+                    <!-- Fill remaining rows to ensure table looks complete -->
+                    <?php for($i = $trips->count() + 1; $i <= 20; $i++): ?>
                     <tr>
-                        <td class="row-number">{{ ($pageIndex * 20) + $i }}</td>
+                        <td class="row-number"><?php echo e($i); ?></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -272,7 +275,7 @@
                         <td></td>
                         <td></td>
                     </tr>
-                    @endfor
+                    <?php endfor; ?>
                 </tbody>
             </table>
         </div>
@@ -287,19 +290,18 @@
                         </div>
                     </td>
                     <td style="width: 260px;">
-                        @if($loop->last)
                         <div class="total-box">
                             <span class="total-label">TOTAL DE EFECTIVO $</span>
                             <span class="total-value">
-                                ${{ number_format($trips->where('payment_method', 'E')->sum('amount'), 2) }}
+                                $<?php echo e(number_format($trips->where('payment_method', 'E')->sum('amount'), 2)); ?>
+
                             </span>
                         </div>
-                        @endif
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-    @endforeach
 </body>
 </html>
+<?php /**PATH C:\Users\cuent\OneDrive\Escritorio\Projects\logbook-app\resources\views/reports/trips-report.blade.php ENDPATH**/ ?>

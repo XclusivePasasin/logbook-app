@@ -172,6 +172,8 @@ class TripController extends Controller
     public function downloadReport(Request $request)
     {
         $date = $request->get('date', now()->format('Y-m-d'));
+        $coordinator = $request->get('coordinator', '');
+        $shift = $request->get('shift', '');
         
         // Get trips for the specified date
         $trips = Trip::with(['driver', 'creator'])
@@ -203,7 +205,9 @@ class TripController extends Controller
             'trips' => $trips,
             'stats' => $stats,
             'date' => $formattedDate,
-        ]);
+            'coordinator' => $coordinator,
+            'shift' => $shift,
+        ])->setPaper('a4', 'landscape');
 
         // Download PDF
         return $pdf->download('reporte-viajes-' . $date . '.pdf');

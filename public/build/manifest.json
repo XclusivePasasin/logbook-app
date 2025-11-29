@@ -1,0 +1,130 @@
+{
+  "_PeopleOutline-7nMoSeJJ.js": {
+    "file": "assets/PeopleOutline-7nMoSeJJ.js",
+    "name": "PeopleOutline",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "__plugin-vue_export-helper-DlAUqK2U.js": {
+    "file": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
+    "name": "_plugin-vue_export-helper"
+  },
+  "_index-BNShoDAj.js": {
+    "file": "assets/index-BNShoDAj.js",
+    "name": "index",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BcChn2R6.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/views/Login.vue",
+      "resources/js/layouts/MainLayout.vue",
+      "resources/js/views/Dashboard.vue",
+      "resources/js/views/trips/TripsList.vue",
+      "resources/js/views/trips/TripForm.vue",
+      "resources/js/views/trips/TripForm.vue",
+      "resources/js/views/drivers/DriversList.vue",
+      "resources/js/views/users/UsersList.vue",
+      "resources/js/views/reports/ReportsView.vue"
+    ]
+  },
+  "resources/js/layouts/MainLayout.vue": {
+    "file": "assets/MainLayout-b9pNEC5D.js",
+    "name": "MainLayout",
+    "src": "resources/js/layouts/MainLayout.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_index-BNShoDAj.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_PeopleOutline-7nMoSeJJ.js"
+    ],
+    "css": [
+      "assets/MainLayout-C9a2sFr7.css"
+    ]
+  },
+  "resources/js/views/Dashboard.vue": {
+    "file": "assets/Dashboard-CsV7czY2.js",
+    "name": "Dashboard",
+    "src": "resources/js/views/Dashboard.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_index-BNShoDAj.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_PeopleOutline-7nMoSeJJ.js"
+    ],
+    "css": [
+      "assets/Dashboard-CFhP07PK.css"
+    ]
+  },
+  "resources/js/views/Login.vue": {
+    "file": "assets/Login-DOERiG6L.js",
+    "name": "Login",
+    "src": "resources/js/views/Login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ],
+    "css": [
+      "assets/Login-Bh_G-hPh.css"
+    ]
+  },
+  "resources/js/views/drivers/DriversList.vue": {
+    "file": "assets/DriversList-BdrF-TVP.js",
+    "name": "DriversList",
+    "src": "resources/js/views/drivers/DriversList.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_index-BNShoDAj.js"
+    ]
+  },
+  "resources/js/views/reports/ReportsView.vue": {
+    "file": "assets/ReportsView-CIShkTz8.js",
+    "name": "ReportsView",
+    "src": "resources/js/views/reports/ReportsView.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_index-BNShoDAj.js"
+    ]
+  },
+  "resources/js/views/trips/TripForm.vue": {
+    "file": "assets/TripForm-tcLuksgb.js",
+    "name": "TripForm",
+    "src": "resources/js/views/trips/TripForm.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_index-BNShoDAj.js"
+    ]
+  },
+  "resources/js/views/trips/TripsList.vue": {
+    "file": "assets/TripsList-C9kuRAQx.js",
+    "name": "TripsList",
+    "src": "resources/js/views/trips/TripsList.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_index-BNShoDAj.js"
+    ]
+  },
+  "resources/js/views/users/UsersList.vue": {
+    "file": "assets/UsersList-BRGB3XoJ.js",
+    "name": "UsersList",
+    "src": "resources/js/views/users/UsersList.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_index-BNShoDAj.js"
+    ]
+  }
+}
